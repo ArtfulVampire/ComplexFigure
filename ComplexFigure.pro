@@ -11,4 +11,5 @@ SOURCES += main.cpp \
     picture.cpp
 
 HEADERS += \
-    picture.h
+    picture.h \
+    pieces.h

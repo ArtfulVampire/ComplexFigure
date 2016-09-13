@@ -7,12 +7,10 @@ Picture::Picture()
 
 QPolygon Picture::myPolygon(int type, int num)
 {
-    double size = 270.;
     double halfSize = size / 2.;
     double halfSizeX = halfSize / width;
     double halfSizeY = halfSize / height;
 
-    const double degToRad = M_PI / 180.;
 
     QVector<QPointF> vec{};
     switch(type)
@@ -30,7 +28,7 @@ QPolygon Picture::myPolygon(int type, int num)
     {
         /// rect
 //        halfSizeY /= 1.1;
-        const double sizeX = halfSizeX * 1.35;
+        const double sizeX = halfSizeX * 1.35; /// pieces::b
         vec.push_back({figX[num] - sizeX, figY - halfSizeY});
         vec.push_back({figX[num] + sizeX, figY - halfSizeY});
         vec.push_back({figX[num] + sizeX, figY + halfSizeY});
@@ -58,8 +56,6 @@ QPolygon Picture::myPolygon(int type, int num)
     case 4:
     {
         /// trapeze
-//        halfSizeX /= 1.1;
-//        halfSizeY /= 1.1;
         const double alpha = 54.;
         const double halfUpper = 0.8 * halfSizeX;
         const double halfLower = halfUpper + tan((90. - alpha) * degToRad) * halfSizeX;
@@ -142,7 +138,7 @@ void Picture::compose()
     for(int i = 0; i < numFigs; ++i)
     {
         figs[i] = myPolygon(feeg[i], i);
-        figTypes = feeg[i];
+        figTypes[i] = feeg[i];
 //        std::cout << feeg[i] << std::endl;
     }
 
@@ -155,25 +151,7 @@ void Picture::compose()
 
 void Picture::addPieces()
 {
-    switch(ans)
-    {
-    case 1:
-    {
-        break;
-    }
-    case 2:
-    {
-        break;
-    }
-    case 3:
-    {
-        break;
-    }
-    default:
-    {
-        break;
-    }
-    }
+
 }
 
 void Picture::draw(const QString &outPath)
@@ -196,57 +174,4 @@ void Picture::draw(const QString &outPath)
     }
 
     pic.save(outPath, nullptr, 100);
-}
-
-// return number of pieces
-int getPieces(int type, int var)
-{
-    switch(type)
-    {
-    case 0:
-    {
-        /// square
-        break;
-    }
-    case 1:
-    {
-        /// rect
-        break;
-    }
-    case 2:
-    {
-        /// triange
-        break;
-    }
-    case 3:
-    {
-        /// rhomb
-        break;
-    }
-    case 4:
-    {
-        /// trapeze
-        break;
-    }
-    case 5:
-    {
-        /// paral
-        break;
-    }
-    case 6:
-    {
-        /// penta
-        break;
-    }
-    case 7:
-    {
-        /// hexa
-        break;
-    }
-    default:
-    {
-        break;
-    }
-    }
-
 }

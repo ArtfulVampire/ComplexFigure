@@ -8,6 +8,7 @@
 #include <chrono>
 #include <random>
 #include <iostream>
+#include <pieces.h>
 
 
 enum figType {square = 0,
@@ -18,7 +19,6 @@ enum figType {square = 0,
               paral = 5,
               penta = 6,
               hexa = 7};
-//enum answer {first = 1, second = 2, third = 3};
 
 
 class Picture
@@ -27,6 +27,7 @@ public:
     Picture();
     const int width = 1280;
     const int height = 1024;
+    const double size = 270.;
     void draw(const QString & outPath = QString());
     void compose();
     QPolygon myPolygon(int type, int num);
