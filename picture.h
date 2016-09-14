@@ -8,7 +8,7 @@
 #include <chrono>
 #include <random>
 #include <iostream>
-#include <pieces.h>
+#include "pieces.h"
 
 
 enum figType {square = 0,

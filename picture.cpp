@@ -7,121 +7,15 @@ Picture::Picture()
 
 QPolygon Picture::myPolygon(int type, int num)
 {
-    double halfSize = size / 2.;
-    double halfSizeX = halfSize / width;
-    double halfSizeY = halfSize / height;
-
-
-    QVector<QPointF> vec{};
-    switch(type)
-    {
-    case 0:
-    {
-        /// square
-        vec.push_back({figX[num] - halfSizeX, figY - halfSizeY});
-        vec.push_back({figX[num] + halfSizeX, figY - halfSizeY});
-        vec.push_back({figX[num] + halfSizeX, figY + halfSizeY});
-        vec.push_back({figX[num] - halfSizeX, figY + halfSizeY});
-        break;
-    }
-    case 1:
-    {
-        /// rect
-//        halfSizeY /= 1.1;
-        const double sizeX = halfSizeX * 1.35; /// pieces::b
-        vec.push_back({figX[num] - sizeX, figY - halfSizeY});
-        vec.push_back({figX[num] + sizeX, figY - halfSizeY});
-        vec.push_back({figX[num] + sizeX, figY + halfSizeY});
-        vec.push_back({figX[num] - sizeX, figY + halfSizeY});
-        break;
-    }
-    case 2:
-    {
-        /// triange
-        vec.push_back({figX[num] - halfSizeX, figY + halfSizeY});
-        vec.push_back({figX[num] + halfSizeX, figY - halfSizeY});
-        vec.push_back({figX[num] + halfSizeX, figY + halfSizeY});
-        break;
-    }
-    case 3:
-    {
-        /// rhomb
-        const double sizeX = halfSizeX * 1.4;
-        vec.push_back({figX[num] - sizeX, figY});
-        vec.push_back({figX[num], figY - halfSizeY});
-        vec.push_back({figX[num] + sizeX, figY});
-        vec.push_back({figX[num], figY + halfSizeY});
-        break;
-    }
-    case 4:
-    {
-        /// trapeze
-        const double alpha = 54.;
-        const double halfUpper = 0.8 * halfSizeX;
-        const double halfLower = halfUpper + tan((90. - alpha) * degToRad) * halfSizeX;
-        vec.push_back({figX[num] - halfLower, figY + halfSizeY});
-        vec.push_back({figX[num] - halfUpper, figY - halfSizeY});
-        vec.push_back({figX[num] + halfUpper, figY - halfSizeY});
-        vec.push_back({figX[num] + halfLower, figY + halfSizeY});
-        break;
-    }
-    case 5:
-    {
-        /// paral
-        const double alpha = 65.; /// base ange, deg
-        const double base = halfSizeX * tan( (90. - alpha) * degToRad); /// 1/4 of a base
-        vec.push_back({figX[num] - base, figY + halfSizeY});
-        vec.push_back({figX[num] - 3 * base, figY - halfSizeY});
-        vec.push_back({figX[num] + base, figY - halfSizeY});
-        vec.push_back({figX[num] + 3 * base, figY + halfSizeY});
-        break;
-    }
-    case 6:
-    {
-        /// penta
-        const double halfSideX = halfSizeX * tan(36. * degToRad);
-        const double radiusY = halfSizeY / cos(36. * degToRad);
-        const double radiusX = halfSizeX / cos(36. * degToRad);
-        vec.push_back({figX[num] - halfSideX, figY + halfSizeY});
-
-        vec.push_back({figX[num] - radiusX * cos(18. * degToRad),
-                       figY - radiusY * sin(18. * degToRad)});
-
-        vec.push_back({figX[num], figY - radiusY});
-
-        vec.push_back({figX[num] + radiusX * cos(18. * degToRad),
-                       figY - radiusY * sin(18. * degToRad)});
-
-        vec.push_back({figX[num] + halfSideX, figY + halfSizeY});
-        break;
-    }
-    case 7:
-    {
-        /// hexa
-        const double halfSideX = halfSizeX * tan(30. * degToRad);
-        const double radiusX = halfSizeX / cos(30. * degToRad);
-        vec.push_back({figX[num] - halfSideX, figY + halfSizeY});
-        vec.push_back({figX[num] - radiusX, figY});
-        vec.push_back({figX[num] - halfSideX, figY - halfSizeY});
-        vec.push_back({figX[num] + halfSideX, figY - halfSizeY});
-        vec.push_back({figX[num] + radiusX, figY});
-        vec.push_back({figX[num] + halfSideX, figY + halfSizeY});
-
-        break;
-    }
-    default:
-    {
-        std::cout << "myPolygon: bad input" << std::endl;
-        break;
-    }
-    }
 
     QVector<QPoint> vec2;
-    for(const QPointF p : vec)
+    for(const QPointF p : fig::figures[type])
     {
-        vec2.push_back(QPoint(p.x() * width, p.y() * height));
+        vec2.push_back(QPoint(figX[num] * width + p.x() * fig::size,
+                              figY * height + p.y() * fig::size));
     }
     return QPolygon(vec2);
+
 }
 
 void Picture::compose()
@@ -129,7 +23,7 @@ void Picture::compose()
 //    std::default_random_engine gen;
     std::random_device gen;
     std::uniform_int_distribution<int> distrAns(1, 3);
-    /// 8 with hexzgon
+    /// 8 with hexagon
     std::vector<int> feeg(8);
 
     std::iota(std::begin(feeg), std::end(feeg), 0);
@@ -139,7 +33,7 @@ void Picture::compose()
     {
         figs[i] = myPolygon(feeg[i], i);
         figTypes[i] = feeg[i];
-//        std::cout << feeg[i] << std::endl;
+        std::cout << feeg[i] << std::endl;
     }
 
     int a = distrAns(gen);
