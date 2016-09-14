@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 
     Picture peec;
     peec.compose();
-    peec.draw("/media/Files/Data/asfasdf.jpg");
+    peec.draw("/media/Files/Data");
 
     return 0;
 }

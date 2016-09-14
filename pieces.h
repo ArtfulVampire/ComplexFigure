@@ -8,7 +8,8 @@
 namespace fig
 {
 const double degToRad = M_PI / 180.;
-const double size = 270. / 2;
+const double size = 250. / 2;
+const double pieceSize = 220. / 2;
 
 const double a = 1.; /// ~halfSize
 const double b = 1.35; /// rectangle coef
@@ -333,7 +334,7 @@ const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
             {
                 {0, 0},
                 {c/2, -a/2},
-                {0, a},
+                {c, 0},
                 {c/2, a/2}
             },
             {
@@ -430,7 +431,7 @@ const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
             },
             {
                 {-d, a},
-                {d, a},
+                {d, -a},
                 {e, a}
             }
         },
@@ -447,7 +448,7 @@ const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
             },
             {
                 {-d, a},
-                {d, a},
+                {d, -a},
                 {d, a}
             },
             {
