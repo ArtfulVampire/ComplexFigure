@@ -8,7 +8,7 @@
 namespace fig
 {
 const double degToRad = M_PI / 180.;
-const double size = 250. / 2;
+const double size = 240. / 2;
 const double pieceSize = 220. / 2;
 
 const double a = 1.; /// ~halfSize
@@ -20,6 +20,8 @@ const double alpha = 65 * degToRad; /// paral angle
 const double f = a / tan(alpha); /// paral 1/4 base
 const double g1 = a * 2 / (1. + cos(36. * degToRad)); /// penta radius
 const double g2 = g1 * cos(54. * degToRad); /// penta half side
+const double g3 = g1 * cos(18 * degToRad); /// penta left x
+const double g4 = a - 2 * g2 * cos(18 * degToRad); /// penta left y
 const double h = a / cos(30. * degToRad) / 2.; /// hexa half side = half radius
 
 const std::vector<QVector<QPointF>> figures =
@@ -68,9 +70,9 @@ const std::vector<QVector<QPointF>> figures =
     /// penta - 6
     {
         {-g2, a},
-        {-g1 * cos(18 * degToRad), a - 2 * g2 * cos(18 * degToRad)},
+        {-g3, g4},
         {0, -a},
-        {g1 * cos(18 * degToRad), a - 2 * g2 * cos(18 * degToRad)},
+        {g3, g4},
         {g2, a}
     },
     /// hexa - 7
@@ -180,31 +182,7 @@ const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
         }
     },
     /// rect
-    {
-        /// 1 var
-        {
-            {
-                {-a, b},
-                {-a, -b},
-                {0, -b}
-            },
-            {
-                {-a, b},
-                {0, -b},
-                {0, b}
-            },
-            {
-                {0, b},
-                {0, -b},
-                {a, -b}
-            },
-            {
-                {0, b},
-                {a, -b},
-                {a, b}
-            }
-        },
-        /// 2 var
+	{
         {
             {
                 {0, 0},
@@ -226,8 +204,7 @@ const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
                 {a, b},
                 {-a, b}
             }
-        },
-        /// 3 var
+		},
         {
             {
                 {0, 0},
@@ -250,7 +227,50 @@ const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
                 {a, b},
                 {-a, b}
             }
-        }
+		},
+		{
+			{
+				{0, 0},
+				{-a, -b},
+				{a, -b},
+				{a, 0}
+			},
+			{
+				{0, 0},
+				{-a, b},
+				{a, b},
+				{a, 0}
+			},
+			{
+				{0, 0},
+				{-a, -b},
+				{-a, b}
+			}
+		},
+		{
+			{
+				{0, 0},
+				{-a, -b},
+				{a, -b}
+			},
+			{
+				{0, 0},
+				{a, -b},
+				{a, 0}
+			},
+			{
+				{0, 0},
+				{a, 0},
+				{a, b},
+				{0, b}
+			},
+			{
+				{0, 0},
+				{0, b},
+				{-a, b},
+				{-a, -b}
+			}
+		}
     },
     /// tri
     {
@@ -503,8 +523,7 @@ const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
                 {-f, a},
                 {0, 0}
             }
-        },
-        //// questionable
+		},
         {
             {
                 {-f, a},
@@ -517,17 +536,16 @@ const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
                 {f, -a},
                 {0, 0}
             },
-            {
-                {0, 0},
-                {f, -a},
-                {2 * f, 0}
-            },
-            {
-                {0, 0},
-                {2 * f, 0},
-                {3 * f, a},
-                {-f, a}
-            }
+			{
+				{f, -a},
+				{3 * f, a},
+				{0, 0}
+			},
+			{
+				{3 * f, a},
+				{-f, a},
+				{0, 0}
+			}
         },
         {
             {
@@ -569,28 +587,116 @@ const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
             }
         }
     },
-    /// penta
+	/// penta
     {
         {
             {
-                {0,0},
-                {0,0},
-                {0,0},
-                {0,0}
+				{0, -a},
+				{0, a},
+				{-g2, a}
             },
             {
-                {0,0},
-                {0,0},
-                {0,0},
-                {0,0}
+				{-g2, a},
+                {-g3, g4},
+				{0, -a}
             },
-            {
-                {0,0},
-                {0,0},
-                {0,0},
-                {0,0}
-            }
-        }
+			{
+				{0, -a},
+				{0, a},
+				{g2, a}
+			},
+			{
+				{g2, a},
+				{g3, g4},
+				{0, -a}
+			}
+		},
+		{
+			{
+				{-g2, a},
+				{-g3, g4},
+				{0, -a}
+			},
+			{
+				{0, -a},
+				{-g2, a},
+				{g2, a}
+			},
+			{
+				{g2, a},
+				{g3, g4},
+				{0, -a}
+			}
+		},
+		{
+			{
+				{0, -a},
+				{0, a},
+				{-g3, g4}
+			},
+			{
+				{0,a},
+				{-g3, g4},
+				{-g2, a}
+			},
+			{
+				{0, a},
+				{0, -a},
+				{g3, g4}
+			},
+			{
+				{0, a},
+				{g3, g4},
+				{g2, a}
+			}
+		},
+		{
+			{
+				{0, -a},
+				{0, a},
+				{-g2, a}
+			},
+			{
+				{-g2, a},
+				{-g3, g4},
+				{0, -a}
+			},
+			{
+				{0, -a},
+				{0, a},
+				{g3, g4}
+			},
+			{
+				{0, a},
+				{g2, a},
+				{g3, g4}
+			}
+		},
+		{
+			{
+				{0, g4},
+				{0, a},
+				{-g2, a},
+				{-g3, g4}
+			},
+			{
+				{0, g4},
+				{0, a},
+				{g2, a},
+				{g3, g4}
+			},
+			{
+				{0, -a},
+				{0, g4},
+				{-g3, g4}
+			},
+			{
+				{0, -a},
+				{0, g4},
+				{g3, g4}
+			}
+		}
+
     },
     /// hexa
     {

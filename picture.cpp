@@ -1,5 +1,13 @@
 #include "picture.h"
 
+QString rightNumber(const int input, int N) // prepend zeros
+{
+	QString h;
+	h.setNum(input);
+	h.prepend(QString(N, '0'));
+	return h.right(N);
+}
+
 Picture::Picture()
 {
 
@@ -33,7 +41,7 @@ void Picture::compose()
     {
         figs[i] = myPolygon(feeg[i], i);
         figTypes[i] = feeg[i];
-        std::cout << feeg[i] << std::endl;
+//        std::cout << feeg[i] << std::endl;
     }
 
     int a = distrAns(gen);
@@ -45,7 +53,7 @@ void Picture::draw(const QString & outDir)
 {
 
     QPixmap pic(width, height);
-    pic.fill("white");
+    pic.fill("black");
     QPainter pnt;
     pnt.begin(&pic);
 
@@ -75,6 +83,16 @@ void Picture::draw(const QString & outDir)
         pieceX = &pieceX_4;
     }
 
+	const std::vector<double> * pieceY;
+	if(numOfPieces == 3)
+	{
+		pieceY = &pieceY_3;
+	}
+	else if(numOfPieces == 4)
+	{
+		pieceY = &pieceY_4;
+	}
+
     std::cout << "ans = " << ans + 1 << std::endl;
     std::cout << "var = " << var << std::endl;
     std::cout << "numOfPieces = " << numOfPieces << std::endl;
@@ -88,7 +106,7 @@ void Picture::draw(const QString & outDir)
         /// rotate figure v (15 * n)
 
         QTransform rotat;
-        double angle = 45 * (rand() % 8);
+        double angle = 15 * (rand() % 8);
         rotat.rotate(angle);
         std::for_each(std::begin(v), std::end(v),
                       [&rotat](QPointF & in)
@@ -112,7 +130,7 @@ void Picture::draw(const QString & outDir)
         for(const QPointF p : v)
         {
             vec2.push_back(QPoint((*pieceX)[num] * width + (p.x() - centX) * fig::pieceSize,
-                                  pieceY * height + (p.y() - low) * fig::pieceSize));
+								  (*pieceY)[num] * height + (p.y() - low) * fig::pieceSize));
 //            std::cout << vec2.back().x() << "\t" << vec2.back().y() << std::endl;
         }
         ++num;
@@ -122,10 +140,10 @@ void Picture::draw(const QString & outDir)
 
 
     pnt.end();
-    static int figNum = 0;
+	static int figNum = 1;
     QString outPath = outDir + "/complexFigure"
-//                      + "_" + QString::number(figNum++)
-//                      + "_ans_" + QString::number(ans + 1)
+					  + "_" + rightNumber(figNum++, 3)
+					  + "_ans_" + QString::number(ans + 1)
                       + ".jpg";
 
     pic.save(outPath, nullptr, 100);
