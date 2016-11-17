@@ -35,7 +35,9 @@ void Picture::compose()
     std::vector<int> feeg(8);
 
     std::iota(std::begin(feeg), std::end(feeg), 0);
-    std::shuffle(std::begin(feeg), std::end(feeg), std::random_device{});
+	std::shuffle(std::begin(feeg), std::end(feeg),
+				 std::default_random_engine(
+					 std::chrono::system_clock::now().time_since_epoch().count()));
 
     for(int i = 0; i < numFigs; ++i)
     {
@@ -140,7 +142,7 @@ void Picture::draw(const QString & outDir)
 
 
     pnt.end();
-	static int figNum = 1;
+	static int figNum = 100;
     QString outPath = outDir + "/complexFigure"
 					  + "_" + rightNumber(figNum++, 3)
 					  + "_ans_" + QString::number(ans + 1)

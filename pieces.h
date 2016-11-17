@@ -16,6 +16,7 @@ const double b = 1.35; /// rectangle coef
 const double c = 1.4; /// rhomb sizeX
 const double d = 0.8; /// trapeze upper
 const double e = 1.4; /// trapeze lower
+const double i = -a + d / (d+e) * 2 * a; /// trapeze diags cross
 const double alpha = 65 * degToRad; /// paral angle
 const double f = a / tan(alpha); /// paral 1/4 base
 const double g1 = a * 2 / (1. + cos(36. * degToRad)); /// penta radius
@@ -179,7 +180,32 @@ const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
                 {a, a},
                 {-a, a}
             }
-        }
+		},
+		{
+			{
+				{0, 0},
+				{0, a},
+				{-a, a}
+			},
+			{
+				{0, 0},
+				{-a, a},
+				{-a, -a},
+				{0, -a}
+			},
+			{
+				{0, 0},
+				{0, -a},
+				{a, -a},
+				{a, 0}
+			},
+			{
+				{0, 0},
+				{a, 0},
+				{a, a},
+				{0, a}
+			}
+		}
     },
     /// rect
 	{
@@ -270,6 +296,30 @@ const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
 				{-a, b},
 				{-a, -b}
 			}
+		},
+		{
+			{
+				{0, 0},
+				{-a, -b},
+				{a, -b}
+			},
+			{
+				{0, 0},
+				{a, -b},
+				{a, b},
+				{0, b}
+			},
+			{
+				{0, 0},
+				{0, b},
+				{-a, 0},
+				{-a, -b}
+			},
+			{
+				{0, b},
+				{-a, b},
+				{-a, 0}
+			}
 		}
     },
     /// tri
@@ -311,7 +361,30 @@ const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
                 {a, a},
                 {0, a}
             }
-        }
+		},
+		{
+			{
+				{0, 0},
+				{-a/2, a/2},
+				{a/2, a/2}
+			},
+			{
+				{-a/2, a/2},
+				{a/2, a/2},
+				{a, a},
+				{-a, a}
+			},
+			{
+				{-a, -a},
+				{-a, 0},
+				{0, 0}
+			},
+			{
+				{0, 0},
+				{-a, a},
+				{-a, 0}
+			}
+		}
     },
     /// rhomb
     {
@@ -498,7 +571,29 @@ const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
                 {d, -a},
                 {e, a}
             }
-        }
+		},
+		{
+			{
+				{0, i},
+				{-d, -a},
+				{d, -a}
+			},
+			{
+				{0, i},
+				{d, -a},
+				{e, a}
+			},
+			{
+				{0, i},
+				{e, a},
+				{-e, a}
+			},
+			{
+				{0, i},
+				{-e, a},
+				{-d, -a}
+			}
+		}
     },
     /// paral
     {
@@ -585,7 +680,33 @@ const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
                 {3 * f, a},
                 {-f, a}
             }
-        }
+		},
+		{
+			{
+				{0, 0},
+				{- 2 * f, 0},
+				{-3 * f, -a},
+				{-f, -a}
+			},
+			{
+				{0, 0},
+				{-f, -a},
+				{f, -a},
+				{2 * f, 0}
+			},
+			{
+				{0, 0},
+				{2 * f, 0},
+				{3 * f, a},
+				{f, a}
+			},
+			{
+				{0, 0},
+				{f, a},
+				{-f, a},
+				{-2 * f, 0}
+			}
+		}
     },
 	/// penta
     {
@@ -695,6 +816,29 @@ const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
 				{0, g4},
 				{g3, g4}
 			}
+		},
+		{
+			{
+				{0, -a},
+				{-g2, a},
+				{-g3, g4}
+			},
+			{
+				{0, -a},
+				{g2, a},
+				{g3, g4}
+			},
+			{
+				{0, -a},
+				{-g2/2, 0},
+				{g2/2, 0}
+			},
+			{
+				{-g2/2, 0},
+				{g2/2, 0},
+				{g2, a},
+				{-g2, a}
+			}
 		}
 
     },
@@ -765,7 +909,34 @@ const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
                 {-h, a},
                 {-2 * h, 0}
             }
-        }
+		},
+		{
+			{
+				{0, -a},
+				{0, 0},
+				{-2 * h, 0},
+				{-h, -a}
+			},
+			{
+				{0, -a},
+				{0, 0},
+				{2 * h, 0},
+				{h, -a}
+			},
+			{
+				{0, a},
+				{0, 0},
+				{-2 * h, 0},
+				{-h, a}
+			},
+			{
+				{0, a},
+				{0, 0},
+				{2 * h, 0},
+				{h, a}
+			}
+		}
+
     }
 };
 } /// end namespace fig
