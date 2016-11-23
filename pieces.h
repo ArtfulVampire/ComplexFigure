@@ -88,51 +88,186 @@ const std::vector<QVector<QPointF>> figures =
 };
 
 
+
+const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces3 =
+{
+	/// square
+	{
+		/// 1 var
+		{
+			{
+				{-a, a},
+				{-a, -a},
+				{a, -a}
+			},
+			{
+				{0, 0},
+				{a, -a},
+				{a, a}
+			},
+			{
+				{0, 0},
+				{a, a},
+				{-a, a}
+			}
+		},
+		{
+			{
+				{-a, a},
+				{-a, 0},
+				{0, 0},
+				{0, a}
+			},
+			{
+				{0, 0},
+				{-a, 0},
+				{-a, -a},
+				{0, -a}
+			},
+			{
+				{0, -a},
+				{a, -a},
+				{a, a},
+				{0, a}
+			}
+		},
+	},
+	/// rect
+	{
+		{
+			{
+				{0, 0},
+				{-a, -b},
+				{a, -b},
+				{a, 0}
+			},
+			{
+				{0, 0},
+				{-a, b},
+				{a, b},
+				{a, 0}
+			},
+			{
+				{0, 0},
+				{-a, -b},
+				{-a, b}
+			}
+		}
+	},
+	/// triang
+	{
+		{
+			{
+				{0, 0},
+				{0, a},
+				{-a, a},
+				{-a, 0}
+			},
+			{
+				{0, 0},
+				{-a, 0},
+				{-a, -a}
+			},
+			{
+				{0, 0},
+				{a, a},
+				{0, a}
+			}
+		},        {
+			{
+				{0, 0},
+				{0, a},
+				{-a, 0},
+				{-a, -a}
+			},
+			{
+				{0, a},
+				{-a, a},
+				{-a, 0}
+			},
+			{
+				{0, 0},
+				{a, a},
+				{0, a}
+			}
+		},
+	},
+	/// rhomb
+	{
+
+	},
+	/// trapeze
+	{
+		{
+			{
+				{-e, a},
+				{-d, -a},
+				{-d, a}
+			},
+			{
+				{-d, a},
+				{-d, -a},
+				{d, -a}
+			},
+			{
+				{-d, a},
+				{d, -a},
+				{e, a}
+			}
+		}
+	},
+	/// paral
+	{
+		{
+			{
+				{-f, a},
+				{-3 * f, -a},
+				{-f, -a}
+			},
+			{
+				{-f, -a},
+				{3 * f, a},
+				{-f, a}
+			},
+			{
+				{-f, -a},
+				{f, -a},
+				{3 * f, a}
+			}
+		}
+	},
+	/// penta
+	{
+		{
+			{
+				{-g2, a},
+				{-g3, g4},
+				{0, -a}
+			},
+			{
+				{0, -a},
+				{-g2, a},
+				{g2, a}
+			},
+			{
+				{g2, a},
+				{g3, g4},
+				{0, -a}
+			}
+		}
+	},
+	/// hexa
+	{
+
+	}
+};
+
 /// figure type, variant, piece num, piece point, x/y
 const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
 {
     /// square
     {
-        /// 1 var
-        {
-            {
-                {-a, a},
-                {-a, -a},
-                {a, -a}
-            },
-            {
-                {0, 0},
-                {a, -a},
-                {a, a}
-            },
-            {
-                {0, 0},
-                {a, a},
-                {-a, a}
-            }
-        },
-        /// 2 var
-        {
-            {
-                {-a, a},
-                {-a, 0},
-                {0, 0},
-                {0, a}
-            },
-            {
-                {0, 0},
-                {-a, 0},
-                {-a, -a},
-                {0, -a}
-            },
-            {
-                {0, -a},
-                {a, -a},
-                {a, a},
-                {0, a}
-            }
-        },
-        /// 3 var
+
         {
             {
                 {-a, a},
@@ -156,8 +291,7 @@ const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
                 {a, a},
                 {0, a}
             }
-        },
-        /// 4 var
+		},
         {
             {
                 {0, 0},
@@ -258,25 +392,6 @@ const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
 			{
 				{0, 0},
 				{-a, -b},
-				{a, -b},
-				{a, 0}
-			},
-			{
-				{0, 0},
-				{-a, b},
-				{a, b},
-				{a, 0}
-			},
-			{
-				{0, 0},
-				{-a, -b},
-				{-a, b}
-			}
-		},
-		{
-			{
-				{0, 0},
-				{-a, -b},
 				{a, -b}
 			},
 			{
@@ -324,44 +439,6 @@ const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
     },
     /// tri
     {
-        /// 1 var
-        {
-            {
-                {0, 0},
-                {0, a},
-                {-a, a},
-                {-a, 0}
-            },
-            {
-                {0, 0},
-                {-a, 0},
-                {-a, -a}
-            },
-            {
-                {0, 0},
-                {a, a},
-                {0, a}
-            }
-        },
-        /// 2 var
-        {
-            {
-                {0, 0},
-                {0, a},
-                {-a, 0},
-                {-a, -a}
-            },
-            {
-                {0, a},
-                {-a, a},
-                {-a, 0}
-            },
-            {
-                {0, 0},
-                {a, a},
-                {0, a}
-            }
-		},
 		{
 			{
 				{0, 0},
@@ -525,23 +602,6 @@ const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
             {
                 {-d, a},
                 {d, -a},
-                {e, a}
-            }
-        },
-        {
-            {
-                {-e, a},
-                {-d, -a},
-                {-d, a}
-            },
-            {
-                {-d, a},
-                {-d, -a},
-                {d, -a}
-            },
-            {
-                {-d, a},
-                {d, -a},
                 {d, a}
             },
             {
@@ -642,23 +702,7 @@ const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
 				{0, 0}
 			}
         },
-        {
-            {
-                {-f, a},
-                {-3 * f, -a},
-                {-f, -a}
-            },
-            {
-                {-f, -a},
-                {3 * f, a},
-                {-f, a}
-            },
-            {
-                {-f, -a},
-                {f, -a},
-                {3 * f, a}
-            }
-        },
+
         {
             {
                 {-2 * f, 0},
@@ -724,23 +768,6 @@ const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
 			{
 				{0, -a},
 				{0, a},
-				{g2, a}
-			},
-			{
-				{g2, a},
-				{g3, g4},
-				{0, -a}
-			}
-		},
-		{
-			{
-				{-g2, a},
-				{-g3, g4},
-				{0, -a}
-			},
-			{
-				{0, -a},
-				{-g2, a},
 				{g2, a}
 			},
 			{

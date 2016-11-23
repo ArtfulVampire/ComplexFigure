@@ -101,11 +101,13 @@ void Picture::draw(const QString & outDir)
 
     int num = 0;
     srand(time(NULL));
-    for(QVector<QPointF> v : fig::pieces[figTypes[ans]][var])
+	auto localPieces = fig::pieces[figTypes[ans]][var];
+	std::shuffle(std::begin(localPieces), std::end(localPieces),
+				 std::default_random_engine(
+					 std::chrono::system_clock::now().time_since_epoch().count()));
+	for(QVector<QPointF> v : localPieces)
     {
         QVector<QPoint> vec2;
-
-        /// rotate figure v (15 * n)
 
         QTransform rotat;
         double angle = 15 * (rand() % 8);
