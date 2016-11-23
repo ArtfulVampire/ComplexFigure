@@ -84,7 +84,13 @@ const std::vector<QVector<QPointF>> figures =
         {h, -a},
         {2 * h, 0},
         {h, a}
-    }
+	},
+	/// empty figure - 8
+	{
+		{0, 0},
+		{0, 0.001},
+		{0.001, 0}
+	}
 };
 
 
@@ -964,7 +970,27 @@ const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
 			}
 		}
 
-    }
+	},
+	/// empty
+	{
+		{
+			{
+				{0, 0},
+				{0, 0.05},
+				{0.001, 0}
+			},
+			{
+				{0, 0},
+				{0, 0.05},
+				{0.001, 0}
+			},
+			{
+				{0, 0},
+				{0, 0.05},
+				{0.001, 0}
+			}
+		}
+	}
 };
 } /// end namespace fig
 

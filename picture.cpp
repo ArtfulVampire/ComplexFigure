@@ -13,6 +13,38 @@ Picture::Picture()
 
 }
 
+void Picture::compose(int figTyp,
+					  int varNum)
+{
+	figs[0] = myPolygon(8, 0);
+	figs[1] = myPolygon(figTyp, 1);
+	figs[2] = myPolygon(8, 2);
+
+	figTypes[0] = 8;
+	figTypes[1] = figTyp;
+	figTypes[2] = 8;
+
+	ans = 1;
+	varSlice = varNum;
+}
+
+void Picture::drawSlices(const QString & path)
+{
+	Picture p;
+	for(int i = 0; i < 8; ++i) /// figTypes
+	{
+		for(int j = 0; j < fig::pieces[i].size(); ++j)
+		{
+//			std::cout << fig::pieces.size() << '\t' << fig::pieces[0].size() << std::endl;
+//			exit(0);
+			p.compose(i, j);
+			p.draw(path,
+				   false,
+				   false);
+		}
+	}
+}
+
 QPolygon Picture::myPolygon(int type, int num)
 {
 
@@ -28,10 +60,7 @@ QPolygon Picture::myPolygon(int type, int num)
 
 void Picture::compose()
 {
-//    std::default_random_engine gen;
-    std::random_device gen;
-    std::uniform_int_distribution<int> distrAns(0, 2);
-    /// 8 with hexagon
+	/// 8 with hexagon, without empty
     std::vector<int> feeg(8);
 
     std::iota(std::begin(feeg), std::end(feeg), 0);
@@ -43,15 +72,19 @@ void Picture::compose()
     {
         figs[i] = myPolygon(feeg[i], i);
         figTypes[i] = feeg[i];
-//        std::cout << feeg[i] << std::endl;
     }
 
-    int a = distrAns(gen);
-    ans = a;
+
+	std::random_device randDev;
+	auto distrAns = std::uniform_int_distribution<int>{0, 2};
+	ans = distrAns(randDev);
+
+	auto distrVar = std::uniform_int_distribution<int>{0, fig::pieces[figTypes[ans]].size() - 1};
+	varSlice = distrVar(randDev);
 }
 
 
-void Picture::draw(const QString & outDir)
+void Picture::draw(const QString & outDir, bool rotateFlag, bool mixFlag)
 {
 
     QPixmap pic(width, height);
@@ -71,10 +104,8 @@ void Picture::draw(const QString & outDir)
                      QString::number(i + 1));
     }
 
-    std::random_device gen;
-    auto distrVar = std::uniform_int_distribution<int>{0, fig::pieces[figTypes[ans]].size() - 1};
-    int var = distrVar(gen);
-    int numOfPieces = fig::pieces[figTypes[ans]][var].size();
+
+	int numOfPieces = fig::pieces[figTypes[ans]][varSlice].size(); /// always 4 now
     const std::vector<double> * pieceX;
     if(numOfPieces == 3)
     {
@@ -96,21 +127,29 @@ void Picture::draw(const QString & outDir)
 	}
 
     std::cout << "ans = " << ans + 1 << std::endl;
-    std::cout << "var = " << var << std::endl;
+	std::cout << "var = " << varSlice << std::endl;
     std::cout << "numOfPieces = " << numOfPieces << std::endl;
 
     int num = 0;
     srand(time(NULL));
-	auto localPieces = fig::pieces[figTypes[ans]][var];
-	std::shuffle(std::begin(localPieces), std::end(localPieces),
-				 std::default_random_engine(
-					 std::chrono::system_clock::now().time_since_epoch().count()));
+	auto localPieces = fig::pieces[figTypes[ans]][varSlice];
+	if(mixFlag)
+	{
+		std::shuffle(std::begin(localPieces), std::end(localPieces),
+					 std::default_random_engine(
+						 std::chrono::system_clock::now().time_since_epoch().count()));
+	}
 	for(QVector<QPointF> v : localPieces)
     {
         QVector<QPoint> vec2;
 
+
         QTransform rotat;
-        double angle = 15 * (rand() % 8);
+		double angle = 0;
+		if(rotateFlag)
+		{
+			angle = 15 * (rand() % 8);
+		}
         rotat.rotate(angle);
         std::for_each(std::begin(v), std::end(v),
                       [&rotat](QPointF & in)
@@ -136,15 +175,16 @@ void Picture::draw(const QString & outDir)
             vec2.push_back(QPoint((*pieceX)[num] * width + (p.x() - centX) * fig::pieceSize,
 								  (*pieceY)[num] * height + (p.y() - low) * fig::pieceSize));
 //            std::cout << vec2.back().x() << "\t" << vec2.back().y() << std::endl;
-        }
+		}
+		std::cout << 1 << std::endl;
         ++num;
 //        std::cout << std::endl;
-        pnt.drawPolygon(QPolygon(vec2));
+		pnt.drawPolygon(QPolygon(vec2));
     }
 
 
     pnt.end();
-	static int figNum = 100;
+	static int figNum = 0;
     QString outPath = outDir + "/complexFigure"
 					  + "_" + rightNumber(figNum++, 3)
 					  + "_ans_" + QString::number(ans + 1)

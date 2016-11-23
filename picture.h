@@ -28,8 +28,10 @@ public:
     Picture();
     const int width = 1280;
     const int height = 1024;
-    void draw(const QString & outDir = QString());
+	void draw(const QString & outDir = QString(), bool rotateFlag = true, bool mixFlag = true);
     void compose();
+	void compose(int figTyp, int varNum);
+	static void drawSlices(const QString & path);
     QPolygon myPolygon(int type, int num);
 
 private:
@@ -78,6 +80,7 @@ private:
     QPolygon figs[numFigs];
     int figTypes[numFigs];
     int ans;
+	int varSlice;
     void addPieces();
 
 
