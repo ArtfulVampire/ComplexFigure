@@ -7,12 +7,12 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
 
-	Picture::drawSlices("/media/Files/Pictures/vars");
-	return 0;
+//	Picture::drawSlices("/media/Files/Pictures/vars");
+//	return 0;
 
     Picture peec;
 
-	for(int i = 0; i < 120; ++i)
+	for(int i = 0; i < 300; ++i)
 	{
 		peec.compose();
 		peec.draw("/media/Files/Pictures/NewCF");
