@@ -87,13 +87,16 @@ void Picture::compose()
 void Picture::draw(const QString & outDir, bool rotateFlag, bool mixFlag)
 {
 
+	const double angleStep = 30;
     QPixmap pic(width, height);
-    pic.fill("black");
+
+	pic.fill("green"); // debug
+//    pic.fill("black"); // release
     QPainter pnt;
     pnt.begin(&pic);
-
     pnt.setPen(color);
     pnt.setBrush(QBrush(color));
+
     const int fontSize = 36;
     pnt.setFont(QFont("Arial", fontSize));
     for(int i = 0; i < numFigs; ++i)
@@ -141,7 +144,7 @@ void Picture::draw(const QString & outDir, bool rotateFlag, bool mixFlag)
 		double angle = 0;
 		if(rotateFlag)
 		{
-			angle = 15 * (rand() % 8);
+			angle = angleStep * (rand() % 8);
 		}
         rotat.rotate(angle);
         std::for_each(std::begin(v), std::end(v),
