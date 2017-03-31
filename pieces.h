@@ -8,23 +8,27 @@
 namespace fig
 {
 const double degToRad = M_PI / 180.;
-const double size = 240. / 2;
+const double size = 220. / 2;
 const double pieceSize = 220. / 2;
 
 const double a = 1.; /// ~halfSize
 const double b = 1.35; /// rectangle coef
 const double c = 1.4; /// rhomb sizeX
+const double t = a * sqrt(2); /// triangle base
+
 const double d = 0.8; /// trapeze upper
 const double e = 1.4; /// trapeze lower
-const double i = -a + d / (d+e) * 2 * a; /// trapeze diags cross
+const double i = -a + d / (d + e) * 2 * a; /// trapeze diags cross
+
 const double alpha = 65 * degToRad; /// paral angle
 const double f = a / tan(alpha); /// paral 1/4 base
+
 const double g1 = a * 2 / (1. + cos(36. * degToRad)); /// penta radius
 const double g2 = g1 * cos(54. * degToRad); /// penta half side
 const double g3 = g1 * cos(18 * degToRad); /// penta left x
 const double g4 = a - 2 * g2 * cos(18 * degToRad); /// penta left y
+
 const double h = a / cos(30. * degToRad) / 2.; /// hexa half side = half radius
-const double t = a * sqrt(2);
 
 const std::vector<QVector<QPointF>> figures =
 {

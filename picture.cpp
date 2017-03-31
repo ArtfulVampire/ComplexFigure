@@ -107,22 +107,15 @@ void Picture::draw(const QString & outDir, bool rotateFlag, bool mixFlag)
 
 	int numOfPieces = fig::pieces[figTypes[ans]][varSlice].size(); /// always 4 now
     const std::vector<double> * pieceX;
+	const std::vector<double> * pieceY;
     if(numOfPieces == 3)
     {
         pieceX = &pieceX_3;
+		pieceY = &pieceY_3;
     }
     else if(numOfPieces == 4)
     {
         pieceX = &pieceX_4;
-    }
-
-	const std::vector<double> * pieceY;
-	if(numOfPieces == 3)
-	{
-		pieceY = &pieceY_3;
-	}
-	else if(numOfPieces == 4)
-	{
 		pieceY = &pieceY_4;
 	}
 
@@ -176,18 +169,16 @@ void Picture::draw(const QString & outDir, bool rotateFlag, bool mixFlag)
 								  (*pieceY)[num] * height + (p.y() - low) * fig::pieceSize));
 //            std::cout << vec2.back().x() << "\t" << vec2.back().y() << std::endl;
 		}
-		std::cout << 1 << std::endl;
-        ++num;
-//        std::cout << std::endl;
+		++num;
 		pnt.drawPolygon(QPolygon(vec2));
     }
 
 
     pnt.end();
 	static int figNum = 0;
-    QString outPath = outDir + "/complexFigure"
+	QString outPath = outDir + "/cf"
 					  + "_" + rightNumber(figNum++, 3)
-					  + "_ans_" + QString::number(ans + 1)
+//					  + "_ans_" + QString::number(ans + 1)
                       + ".jpg";
 
     pic.save(outPath, nullptr, 100);
