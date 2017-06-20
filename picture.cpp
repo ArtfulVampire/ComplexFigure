@@ -143,7 +143,6 @@ void Picture::draw(const QString &outDir, bool rotateFlag, bool mixFlag)
 
 QPixmap Picture::drawPic(bool rotateFlag, bool mixFlag)
 {
-
 	const double angleStep = 30;
     QPixmap pic(width, height);
 
@@ -156,6 +155,8 @@ QPixmap Picture::drawPic(bool rotateFlag, bool mixFlag)
 
     const int fontSize = 36;
     pnt.setFont(QFont("Arial", fontSize));
+
+	/// draw answer variants
     for(int i = 0; i < numFigs; ++i)
     {
         pnt.drawPolygon(figs[i]);
@@ -166,6 +167,7 @@ QPixmap Picture::drawPic(bool rotateFlag, bool mixFlag)
 
 
 	int numOfPieces = fig::pieces[figTypes[ans]][varSlice].size(); /// always 4 now
+	/// set (x, y) for pieces
     const std::vector<double> * pieceX;
 	const std::vector<double> * pieceY;
     if(numOfPieces == 3)
@@ -179,12 +181,11 @@ QPixmap Picture::drawPic(bool rotateFlag, bool mixFlag)
 		pieceY = &pieceY_4;
 	}
 
-//    std::cout << "ans = " << ans + 1 << std::endl;
+//	std::cout << "ans = " << ans + 1 << std::endl;
 //	std::cout << "var = " << varSlice << std::endl;
-//    std::cout << "numOfPieces = " << numOfPieces << std::endl;
+//	std::cout << "numOfPieces = " << numOfPieces << std::endl;
 
-    int num = 0;
-    srand(time(NULL));
+	int num = 0;
 	auto localPieces = fig::pieces[figTypes[ans]][varSlice];
 
 	if(mixFlag)
@@ -197,7 +198,6 @@ QPixmap Picture::drawPic(bool rotateFlag, bool mixFlag)
 	for(QVector<QPointF> v : localPieces)
     {
         QVector<QPoint> vec2;
-
 
         QTransform rotat;
 		double angle = 0;

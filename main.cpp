@@ -2,6 +2,8 @@
 #include "picture.h"
 #include <QPixmap>
 
+
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -10,6 +12,7 @@ int main(int argc, char *argv[])
 //	Picture::drawSlices("/media/Files/Pictures/vars");
 //	return 0;
 
+	srand(time(NULL));
 
     Picture peec;
 	/// full random
@@ -31,10 +34,13 @@ int main(int argc, char *argv[])
 //		}
 //	}
 
-	/// 0-19 means first and second exp
-	/// 20-39 means second and third exp
-	/// 40-59 means third and first exp
+
+	/// [0] means first and second exp
+	/// [1] means second and third exp
+	/// [2] means third and first exp
 	std::vector<int> whichPair(3, 0);
+
+	/// need to leave 60 general slices
 
 	std::random_device randDev;
 	auto distrAns = std::uniform_int_distribution<int>{0, 2};
@@ -63,11 +69,11 @@ int main(int argc, char *argv[])
 
 			std::cout << "1 OK\t";
 			peec.drawPic("/media/Files/Pictures/NewestCF").save(
-						prePath + QString::number(num1) + ".jpg");
+						prePath + rightNumber(num1, 3) + ".jpg");
 			peec.composeNew(fig, var);
 			std::cout << "2 OK\t";
 			peec.drawPic("/media/Files/Pictures/NewestCF").save(
-						prePath + QString::number(num2) + ".jpg");
+						prePath + rightNumber(num2, 3) + ".jpg");
 
 			std::cout << std::endl;
 

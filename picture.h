@@ -12,6 +12,8 @@
 #include <QTransform>
 
 
+QString rightNumber(const int input, int N);
+
 enum figType {square = 0,
               rect = 1,
               tri = 2,
