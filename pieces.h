@@ -100,178 +100,6 @@ const std::vector<QVector<QPointF>> figures =
 
 
 
-const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces3 =
-{
-	/// square
-	{
-		/// 1 var
-		{
-			{
-				{-a, a},
-				{-a, -a},
-				{a, -a}
-			},
-			{
-				{0, 0},
-				{a, -a},
-				{a, a}
-			},
-			{
-				{0, 0},
-				{a, a},
-				{-a, a}
-			}
-		},
-		{
-			{
-				{-a, a},
-				{-a, 0},
-				{0, 0},
-				{0, a}
-			},
-			{
-				{0, 0},
-				{-a, 0},
-				{-a, -a},
-				{0, -a}
-			},
-			{
-				{0, -a},
-				{a, -a},
-				{a, a},
-				{0, a}
-			}
-		},
-	},
-	/// rect
-	{
-		{
-			{
-				{0, 0},
-				{-a, -b},
-				{a, -b},
-				{a, 0}
-			},
-			{
-				{0, 0},
-				{-a, b},
-				{a, b},
-				{a, 0}
-			},
-			{
-				{0, 0},
-				{-a, -b},
-				{-a, b}
-			}
-		}
-	},
-	/// triang
-	{
-		{
-			{
-				{0, 0},
-				{0, a},
-				{-a, a},
-				{-a, 0}
-			},
-			{
-				{0, 0},
-				{-a, 0},
-				{-a, -a}
-			},
-			{
-				{0, 0},
-				{a, a},
-				{0, a}
-			}
-		},        {
-			{
-				{0, 0},
-				{0, a},
-				{-a, 0},
-				{-a, -a}
-			},
-			{
-				{0, a},
-				{-a, a},
-				{-a, 0}
-			},
-			{
-				{0, 0},
-				{a, a},
-				{0, a}
-			}
-		},
-	},
-	/// rhomb
-	{
-
-	},
-	/// trapeze
-	{
-		{
-			{
-				{-e, a},
-				{-d, -a},
-				{-d, a}
-			},
-			{
-				{-d, a},
-				{-d, -a},
-				{d, -a}
-			},
-			{
-				{-d, a},
-				{d, -a},
-				{e, a}
-			}
-		}
-	},
-	/// paral
-	{
-		{
-			{
-				{-f, a},
-				{-3 * f, -a},
-				{-f, -a}
-			},
-			{
-				{-f, -a},
-				{3 * f, a},
-				{-f, a}
-			},
-			{
-				{-f, -a},
-				{f, -a},
-				{3 * f, a}
-			}
-		}
-	},
-	/// penta
-	{
-		{
-			{
-				{-g2, a},
-				{-g3, g4},
-				{0, -a}
-			},
-			{
-				{0, -a},
-				{-g2, a},
-				{g2, a}
-			},
-			{
-				{g2, a},
-				{g3, g4},
-				{0, -a}
-			}
-		}
-	},
-	/// hexa
-	{
-
-	}
-};
 
 /// figure type, variant, piece num, piece point, x/y
 const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
@@ -1045,6 +873,30 @@ const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
 				{c, 0}
 			}
 		}
+		,
+		{
+			{
+				{-c, 0},
+				{0, -a},
+				{0, 0}
+			},
+			{
+				{0, 0},
+				{c, 0},
+				{0, -a}
+			},
+			{
+				{-c, 0},
+				{-c/2, a/2},
+				{c/2, a/2},
+				{c, 0}
+			},
+			{
+				{-c/2, a/2},
+				{c/2, a/2},
+				{0, a}
+			}
+		}
     },
     /// trapeze
     {
@@ -1745,7 +1597,7 @@ const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
             }
         },
         {
-			/// simple, rhomd conflict
+			/// simple, rhomb conflict
             {
                 {-2 * h, 0},
                 {-h, -a},
@@ -1946,6 +1798,181 @@ const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces =
 		}
 	}
 };
+
+
+const std::vector<std::vector<std::vector<QVector<QPointF>>>> pieces3 =
+{
+	/// square
+	{
+		/// 1 var
+		{
+			{
+				{-a, a},
+				{-a, -a},
+				{a, -a}
+			},
+			{
+				{0, 0},
+				{a, -a},
+				{a, a}
+			},
+			{
+				{0, 0},
+				{a, a},
+				{-a, a}
+			}
+		},
+		{
+			{
+				{-a, a},
+				{-a, 0},
+				{0, 0},
+				{0, a}
+			},
+			{
+				{0, 0},
+				{-a, 0},
+				{-a, -a},
+				{0, -a}
+			},
+			{
+				{0, -a},
+				{a, -a},
+				{a, a},
+				{0, a}
+			}
+		},
+	},
+	/// rect
+	{
+		{
+			{
+				{0, 0},
+				{-a, -b},
+				{a, -b},
+				{a, 0}
+			},
+			{
+				{0, 0},
+				{-a, b},
+				{a, b},
+				{a, 0}
+			},
+			{
+				{0, 0},
+				{-a, -b},
+				{-a, b}
+			}
+		}
+	},
+	/// triang
+	{
+		{
+			{
+				{0, 0},
+				{0, a},
+				{-a, a},
+				{-a, 0}
+			},
+			{
+				{0, 0},
+				{-a, 0},
+				{-a, -a}
+			},
+			{
+				{0, 0},
+				{a, a},
+				{0, a}
+			}
+		},        {
+			{
+				{0, 0},
+				{0, a},
+				{-a, 0},
+				{-a, -a}
+			},
+			{
+				{0, a},
+				{-a, a},
+				{-a, 0}
+			},
+			{
+				{0, 0},
+				{a, a},
+				{0, a}
+			}
+		},
+	},
+	/// rhomb
+	{
+
+	},
+	/// trapeze
+	{
+		{
+			{
+				{-e, a},
+				{-d, -a},
+				{-d, a}
+			},
+			{
+				{-d, a},
+				{-d, -a},
+				{d, -a}
+			},
+			{
+				{-d, a},
+				{d, -a},
+				{e, a}
+			}
+		}
+	},
+	/// paral
+	{
+		{
+			{
+				{-f, a},
+				{-3 * f, -a},
+				{-f, -a}
+			},
+			{
+				{-f, -a},
+				{3 * f, a},
+				{-f, a}
+			},
+			{
+				{-f, -a},
+				{f, -a},
+				{3 * f, a}
+			}
+		}
+	},
+	/// penta
+	{
+		{
+			{
+				{-g2, a},
+				{-g3, g4},
+				{0, -a}
+			},
+			{
+				{0, -a},
+				{-g2, a},
+				{g2, a}
+			},
+			{
+				{g2, a},
+				{g3, g4},
+				{0, -a}
+			}
+		}
+	},
+	/// hexa
+	{
+
+	}
+};
+
 } /// end namespace fig
 
 #endif // PIECES_H

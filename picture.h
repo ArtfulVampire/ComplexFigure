@@ -29,8 +29,10 @@ public:
     const int width = 1280;
     const int height = 1024;
 	void draw(const QString & outDir = QString(), bool rotateFlag = true, bool mixFlag = true);
-    void compose();
-	void compose(int figTyp, int varNum);
+	QPixmap drawPic(bool rotateFlag = true, bool mixFlag = true);
+	void composeExample();
+	bool composeNew(int answerType, int inVarSlice);
+	void composeExample(int figTyp, int varNum);
 	static void drawSlices(const QString & path);
     QPolygon myPolygon(int type, int num);
 
@@ -50,6 +52,7 @@ private:
         3./6.,
         (3. + dist_3)/6.
 	};
+	const std::vector<double> pieceY_3 = std::vector<double>(3, 2.0 / 6.);
 
 	const double dist_4 = 1.5;
     const std::vector<double> pieceX_4 = {
@@ -58,13 +61,11 @@ private:
 		(3. + 0.45 * dist_4)/6.,
 		(3. + 1.35 * dist_4)/6.
 	};
+	const std::vector<double> pieceY_4 = std::vector<double>(4, 2.1 / 6.);
 
-	const std::vector<double> pieceY_3 = std::vector<double>(3, 2.0 / 6.);
-	const std::vector<double> pieceY_4 = std::vector<double>(4, 2.0 / 6.);
+	const double figY = 4.1 / 6.;
+	const double numY = 5.3 / 6.;
 
-
-	const double figY = 4.0/6.;
-	const double numY = 5.2/6.;
 
     const QColor color = "darkgray";
     QPolygon figs[numFigs];
